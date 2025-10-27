@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "nuxt": "^3.19.3",
+        "vue": "^3.5.22",
+        "vue-router": "^4.6.3"
+    }
+}
