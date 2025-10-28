@@ -16,7 +16,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: import.meta.env.APP_URL,
-      apiVersion: 'v1'
+      apiVersion: 'api/v1',
+      apiSecret: import.meta.env.API_SECRET,
     }
   }
 })
