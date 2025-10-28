@@ -7,6 +7,9 @@ export default defineNuxtConfig({
     public: 'public/nuxt',
   },
 
+  modules: ['@nuxt/ui'],
+  css: ['~/assets/css/main.css'],
+
   app: {
     head: {
       title: 'Appflame Test Task'
