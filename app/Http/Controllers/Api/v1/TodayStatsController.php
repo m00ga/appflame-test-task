@@ -8,6 +8,9 @@ use App\Services\EventService;
 
 class TodayStatsController extends Controller
 {
+    /**
+     * Get today stats
+     */
     public function __invoke(EventService $eventService)
     {
         return TodayStatsResource::make(

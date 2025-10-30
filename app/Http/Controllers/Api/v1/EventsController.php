@@ -6,13 +6,15 @@ use App\Exceptions\IdempotentKeyExistsException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\StoreRequest;
 use App\Services\EventService;
+use Dedoc\Scramble\Attributes\HeaderParameter;
 use Throwable;
 
 class EventsController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store new event
      */
+    #[HeaderParameter(name: 'X-Idempotency-Key', required: true)]
     public function store(StoreRequest $request, EventService $eventService)
     {
         try {
