@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\DTO\TodayStatsDTO;
+use App\Exceptions\IdempotentKeyExistsException;
+use App\Http\Requests\Api\v1\StoreRequest;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Expression;
@@ -27,5 +29,25 @@ class EventService
         $totalCount = $eventData->reduce(fn($carry, $item) => $carry + $item, 0);
 
         return new TodayStatsDTO(compact('eventData', 'totalCount'));
+    }
+
+    /**
+     * @throws IdempotentKeyExistsException
+     * @throws \Throwable
+     */
+    public function storeEvent(StoreRequest $request): void
+    {
+        $idempotencyKey = $request->header(
+            config('app.idempotent_key')
+        );
+
+        if (Event::query()->where('idempotency_key', $idempotencyKey)->exists()) {
+            throw new IdempotentKeyExistsException();
+        }
+
+        $eventModel = new Event($request->validated());
+        $eventModel->idempotency_key = $idempotencyKey;
+
+        $eventModel->saveOrFail();
     }
 }

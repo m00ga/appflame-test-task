@@ -3,5 +3,8 @@ const defineApiRoutes = <T extends Record<string, ApiRouteGroup>>(routes: T) => 
 export default defineApiRoutes({
     todayStats: {
         index: 'stats/today'
+    },
+    sendEvent: {
+        store: 'events'
     }
 });

@@ -123,5 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'api_secret' => env('API_SECRET')
+    'api_secret' => env('API_SECRET'),
+    'idempotent_key' => env('IDEMPOTENT_KEY', 'X-Idempotency-Key')
 ];

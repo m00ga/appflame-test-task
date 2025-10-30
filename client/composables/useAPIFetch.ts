@@ -1,5 +1,3 @@
-import {useRuntimeConfig} from "#app";
-
 type fetchType<T> = typeof $fetch<T>;
 
 export function useAPIFetch<T = unknown>(
@@ -12,8 +10,8 @@ export function useAPIFetch<T = unknown>(
     return $fetch<T>(url, {
         ...opts,
         onRequest ({options}) {
-            if (config.public.apiSecret) {
-                options.headers.append('Authorization', `Bearer ${config.public.apiSecret}`)
+            if (config.apiSecret) {
+                options.headers.append('Authorization', `Bearer ${config.apiSecret}`)
             }
         },
         baseURL: fullApiURL
